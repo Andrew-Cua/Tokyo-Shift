@@ -17,6 +17,7 @@ import frc.robot.subsystems.Drivetrain_Subsys;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Pneumatics_Subsys;
 import frc.robot.subsystems.Shifter_Subsys;
+import frc.robot.utils.*;
 
 /**
  * The VM is configured to automatically run this class, and to call the
@@ -130,6 +131,7 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     Scheduler.getInstance().run();
+    Logger.printTelemetry();
   }
 
   /**
@@ -137,6 +139,6 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void testPeriodic() {
-    m_EvoShifter.shiftDown();
+    m_EvoShifter.shiftUp();
   }
 }

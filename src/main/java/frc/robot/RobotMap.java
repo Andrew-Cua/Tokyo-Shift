@@ -28,8 +28,8 @@ public class RobotMap {
                           rightFrontMotor = 2,
                           rightBackMotor = 3;
 
-  public static final int leftShifterOut = 0,
-                          leftShifterIn = 1,
+  public static final int leftShifterOut = 3,
+                          leftShifterIn = 4,
                           rightShifterOut = 8,
                           rightShifterIn = 9;
 }

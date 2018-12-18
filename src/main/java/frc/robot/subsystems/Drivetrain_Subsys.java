@@ -35,8 +35,8 @@ public class Drivetrain_Subsys extends Subsystem {
     this.frontRight = new Spark(RobotMap.rightFrontMotor);
     this.backRight  = new Spark(RobotMap.rightBackMotor);
 
-    this.frontLeft.setInverted(inverted);
-    this.backLeft.setInverted(inverted);
+    this.frontRight.setInverted(inverted);
+    this.backRight.setInverted(inverted);
 
     
     
@@ -53,11 +53,11 @@ public class Drivetrain_Subsys extends Subsystem {
 
   public void teleopDrive()
   {
-     double x = Robot.m_oi.getJoystick().getY( Hand.kLeft);
-     double rot = Robot.m_oi.getJoystick().getX(Hand.kRight);
+     double x = Robot.m_oi.getController().getY(Hand.kLeft);
+     double rot = Robot.m_oi.getController().getX(Hand.kRight);
 
-     double leftPower = x + rot;
-     double rightPower = x - rot;
+     double leftPower = x - rot;
+     double rightPower = x + rot;
 
     power(leftPower, rightPower);
   }
@@ -65,6 +65,18 @@ public class Drivetrain_Subsys extends Subsystem {
   public void stop()
   {
     power(0,0);
+  }
+
+  public void printPower()
+  {
+    System.out.println("Left Motor Power: " + frontLeft.get());
+    System.out.println("Right Motor Power: " + frontRight.get());
+  }
+
+  public void run()
+  {
+    power(1,1);
+    System.out.print(frontLeft.get() + frontRight.get());
   }
 
   public static Drivetrain_Subsys getInstance()

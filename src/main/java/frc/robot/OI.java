@@ -21,18 +21,24 @@ public class OI {
   private Button shiftUpButton;
   private Button shiftDownButton;
   private Button compressButton;
+  private Joystick driveStick = new Joystick(1);
   public OI()
   {
     shiftUpButton = new JoystickButton(driveController, 1);
     shiftDownButton = new JoystickButton(driveController, 2);
     compressButton = new JoystickButton(driveController, 6);
     compressButton.whileHeld(new EnableCompressor_Command());
-    shiftUpButton.whenReleased(new ShiftUpGear_Command());
+    shiftUpButton.whenReleased(new ToggleGear_Command());
     shiftDownButton.whenReleased(new ShiftGear_Command());
   }
 
-  public XboxController getJoystick()
+  public XboxController getController()
   {
     return this.driveController;
+  }
+
+  public Joystick getStick()
+  {
+    return this.driveStick;
   }
 }

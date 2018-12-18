@@ -7,11 +7,10 @@
 
 package frc.robot.subsystems;
 
-import javax.xml.crypto.dsig.keyinfo.RetrievalMethod;
-
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import frc.robot.RobotMap;
+import frc.robot.utils.ShifterToggler;
 import frc.robot.utils.shifterPos;
 
 /**
@@ -23,25 +22,29 @@ public class Shifter_Subsys extends Subsystem {
 
   private static Shifter_Subsys evo;
 
-  private Solenoid out, in;
   private shifterPos gearPos = shifterPos.HIGHGEAR;
+  public ShifterToggler toggler;
 
   private Shifter_Subsys()
   {
-    this.out = new Solenoid(RobotMap.leftShifterOut);
-    this.in = new Solenoid(RobotMap.leftShifterIn);
+    this.toggler = new ShifterToggler();
   }
 
   public void shiftUp()
   {
-    out.set(true);
-    in.set(false);
+    toggler.getSolenoidOut().set(true);
+    toggler.getSolenoidIn().set(false);
   }
 
   public void shiftDown()
   {
-    out.set(false);
-    in.set(true);
+    toggler.getSolenoidOut().set(false);
+    toggler.getSolenoidIn().set(true);
+  }
+
+  public void togglerGear()
+  {
+    toggler.toggleGear();
   }
 
   public static Shifter_Subsys getInstance()
@@ -59,6 +62,10 @@ public class Shifter_Subsys extends Subsystem {
   }
   public shifterPos getGearPos() {
     return gearPos;
+  }
+  public void printGearPos()
+  {
+    System.out.println("Current Gear Position: " + gearPos);
   }
 
   @Override
